@@ -1,8 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import Student from "./model/student.js";
 
-let app = express();
-let ConnectionString = "mongodb+srv://admin:admin123@cluster0.lmgpokd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const app = express();
+
+app.use(bodyParser.json());
+
+const ConnectionString = "mongodb+srv://admin:admin123@cluster0.lmgpokd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 mongoose.connect(ConnectionString).then(
     ()=>{
@@ -11,6 +16,8 @@ mongoose.connect(ConnectionString).then(
 ).catch(()=>{
     console.log("failed connect to DB");
 })
+
+
 
 app.get("/", (req,res)=>{
     
@@ -21,10 +28,32 @@ app.get("/", (req,res)=>{
 
 app.post("/", (req,res)=>{
 
-     res.json({
-        message : "this is a post request",
-    })
+    const student = new Student({
+
+        name : req.body.name,
+        age : req.body.age,
+        email : req.body.email
+    });
+
+student.save().then(
+    ()=>{
+        res.json({
+            message : "student save successfully"
+        })
+    }
+).catch(
+    ()=>{
+        res.json({
+            message : "failed to save"
+        })
+    }
+)
+
 })
+
+
+
+
 
 app.delete("/", (req,res)=>{
      res.json({
