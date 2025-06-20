@@ -8,6 +8,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
+
 const ConnectionString = "mongodb+srv://admin:admin123@cluster0.lmgpokd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 mongoose.connect(ConnectionString).then(
