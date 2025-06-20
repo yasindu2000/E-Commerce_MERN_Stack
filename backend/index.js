@@ -24,6 +24,7 @@ app.use("/students", studentRouter)
 app.use("/users", userRouter)
 
 
+
 app.listen(5000, ()=>{
     console.log("Server Is Running");
 })

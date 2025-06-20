@@ -31,3 +31,26 @@ const passwordHash = bcrypt.hashSync(req.body.password,10)
     )
 
 }
+
+
+export function loginUser(req, res){ 
+
+    const email = req.body.email
+    const password = req.body.password
+
+    User.findOne(
+        {
+            email : email
+        }
+    ).then(
+        (user)=>{
+             if(user == null){
+                res.json(
+                    {
+                        message : "user not found"
+                    }
+                )
+             }
+        }
+    )
+}
