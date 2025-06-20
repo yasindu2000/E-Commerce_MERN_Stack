@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import Student from "./model/student.js";
+import studentRouter from "./routers/studentRouter.js";
 
 const app = express();
 
@@ -19,47 +19,7 @@ mongoose.connect(ConnectionString).then(
 
 
 
-app.get("/", (req,res)=>{
-    
-    res.json({
-        message : "this is a get request",
-    })
-})
-
-app.post("/", (req,res)=>{
-
-    const student = new Student({
-
-        name : req.body.name,
-        age : req.body.age,
-        email : req.body.email
-    });
-
-student.save().then(
-    ()=>{
-        res.json({
-            message : "student save successfully"
-        })
-    }
-).catch(
-    ()=>{
-        res.json({
-            message : "failed to save"
-        })
-    }
-)
-
-})
-
-
-
-
-
-app.delete("/", (req,res)=>{
-     res.json({
-        message : "this is a delete request",
-    })
-})
+app.use("/students", studentRouter)
 
 
 app.listen(5000, ()=>{
