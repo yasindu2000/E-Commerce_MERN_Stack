@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import studentRouter from "./routers/studentRouter.js";
+import userRouter from "./routers/userRouter.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ mongoose.connect(ConnectionString).then(
 
 
 app.use("/students", studentRouter)
+app.use("/users", userRouter)
 
 
 app.listen(5000, ()=>{
