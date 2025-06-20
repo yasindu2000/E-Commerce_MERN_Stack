@@ -1,8 +1,19 @@
 import User from "../model/user.js";
+import bcrypt from "bcrypt"
 
 export function createUser(req, res){
 
-    const user = new User(req.body)
+const passwordHash = bcrypt.hashSync(req.body.password,10)
+
+    const userData = {
+        firstName : req.body.firstName,
+        lastName : req.body.lastName,
+        email : req.body.email,
+        password : passwordHash,
+        phone : req.body.phone
+    }
+
+    const user = new User(userData)
 
     user.save().then(
         ()=>{
