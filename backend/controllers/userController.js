@@ -45,11 +45,21 @@ export function loginUser(req, res){
     ).then(
         (user)=>{
              if(user == null){
-                res.json(
-                    {
-                        message : "user not found"
-                    }
-                )
+                res.status(404).json({
+                    message : "user not found"
+                })
+               
+             }else{
+                const isPasswordCorrect = bcrypt.compareSync(password,user.password)
+                if(isPasswordCorrect){
+                    res.json({
+                        message : "Login Successful"
+                    })
+                }else{
+                    res.status(403).json({
+                        message : "Incorrect password"
+                    })
+                }
              }
         }
     )
