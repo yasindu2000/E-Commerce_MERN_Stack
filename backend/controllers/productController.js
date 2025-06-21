@@ -58,3 +58,64 @@ export async function getProducts(req, res){
     }
 
 }
+
+
+export async function deleteProduct(req, res){
+
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message : "Access denied.admins only"
+        })
+        return;
+    }
+
+    try {
+        
+        const productId = req.params.productId;
+
+        await Product.deleteOne({productId : productId})
+        res.json({
+            message : "Product deleted successfully"
+        })
+
+    } catch (error) {
+        console.error("error deleting products :", error);
+        return res.status(500).json({
+            message: "failed to delete products"
+        })
+    }
+
+}
+
+export async function updateProduct(req, res){
+
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message : "Access denied.admins only"
+        })
+        return;
+    }
+
+    const data = req.body;
+    const productId = req.params.productId;
+    data.productId = productId;
+
+    try {
+
+        await Product.updateOne(
+            {
+                productId : productId
+            },
+            data
+        );
+        res.json({
+            message : "Product updated succesfully"
+        })
+        
+    } catch (error) {
+        console.error("error deleting products :", error);
+        return res.status(500).json({
+            message: "failed to delete products"
+        })
+    }
+}
