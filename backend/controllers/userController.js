@@ -6,6 +6,8 @@ export function createUser(req, res){
 
 const passwordHash = bcrypt.hashSync(req.body.password,10)
 
+
+
     const userData = {
         firstName : req.body.firstName,
         lastName : req.body.lastName,

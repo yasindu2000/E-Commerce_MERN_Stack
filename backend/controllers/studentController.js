@@ -20,6 +20,23 @@ export  function getStudents(req,res){
 
 
 export  function saveStudents(req,res){
+    if(req.user == null){
+        res.status(403).json(
+            {
+                message : "please login to create a student"
+            }
+        ) 
+        return
+    }
+    if(req.user.role != "admin"){
+        res.status(403).json(
+            {
+                message : "please login as an admin to create student"
+            }
+        )
+        return
+    }
+    
 
     const student = new Student({
 
