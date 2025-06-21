@@ -119,3 +119,38 @@ export async function updateProduct(req, res){
         })
     }
 }
+
+export async function getProductInfo(req, res) {
+
+    try {
+          const productId = req.params.productId;
+          const product = await Product.findOne({productId : productId})
+
+          if(product == null){
+            res.status(404).json({
+                message : "product not found"
+            })
+            return;
+          }
+        if(isAdmin(req)){
+            res.json(product);
+           
+        }else{
+           if(product.isAvailble){
+            res.json(product)
+           }else{
+            res.status(404).json({
+                message : "product is not available"
+            })
+           }
+        }
+        
+    } catch (error) {
+        console.error("error fetching products :", error);
+        return res.status(500).json({
+            message: "failed to fetch products"
+        })
+    }
+
+    
+}
