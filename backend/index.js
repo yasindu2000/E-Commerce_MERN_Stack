@@ -54,7 +54,7 @@ mongoose.connect(ConnectionString).then(
 
 
 app.use("/users", userRouter)
-app.use("/product", productRouter)
+app.use("/products", productRouter)
 
 
 
