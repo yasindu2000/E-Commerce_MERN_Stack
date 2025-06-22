@@ -18,7 +18,7 @@ app.use(
 
         if(value != null){
             const token = value.replace("Bearer ","")
-            jwt.verify(token,"ywd-2005",(err,decoded)=>{ 
+            jwt.verify(token,(err,decoded)=>{ 
                 if(decoded == null){
                     res.status(403).json(
                         {
