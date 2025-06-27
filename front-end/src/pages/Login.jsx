@@ -1,9 +1,9 @@
 import React from 'react'
 
-function login() {
+function Login() {
   return (
     <div className='font-bold text-3xl align-middle'>login</div>
   )
 }
 
-export default login
+export default Login
