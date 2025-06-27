@@ -2,7 +2,7 @@ import React from 'react'
 
 function register() {
   return (
-    <div>register</div>
+    <div className='font-bold text-3xl align-middle'>register</div>
   )
 }
 
