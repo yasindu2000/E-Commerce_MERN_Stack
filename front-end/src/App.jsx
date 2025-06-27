@@ -1,18 +1,21 @@
-import './App.css'
-import ProductCard from './components/productCard'
+import { BrowserRouter, Routes, Route} from "react-router-dom"
+import Home from "./pages/Home"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 
 function App() {
   
 
   return (
-    <> 
-      <div>
-       <ProductCard name="boxer" price="$1900" image="https://picsum.photos/id/237/200/300"/>
-       <ProductCard name="lion shaperd" price="$2500" image="https://picsum.photos/id/237/200/300"/>
-      </div>
-       
-    </>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/register" element={<Register/>}/>
+    </Routes>
+    
+    </BrowserRouter>
   )
 }
 
