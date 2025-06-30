@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
+import Register from "./pages/register"
 import Admin from "./pages/Admin"
-
+import Login from "./pages/Login"
+import Home from './pages/Home'
 
 function App() {
   
