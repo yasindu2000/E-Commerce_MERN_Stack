@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from "react-router-dom";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 
 function Login() {
@@ -14,8 +15,12 @@ function Login() {
       password : password
     }).then((response)=>{
                console.log(response.data)
+              //  alert("Login successful")
+              toast.success("Login Successful")
     }).catch((error)=>{
                 console.log(error)
+                // alert("login failed")
+                toast.error("Login Failed")
     })
   }
   return (
