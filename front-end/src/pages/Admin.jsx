@@ -4,6 +4,8 @@ import { FaBoxArchive } from "react-icons/fa6";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
+import ProductAdmin from "./admin/ProductAdmin";
+import AddProductAdmin from "./admin/AddProductAdmin";
 
 function Admin() {
   return (
@@ -19,7 +21,9 @@ function Admin() {
             <div className="w-[calc(100%-300px)]  h-full">
                 <Routes path="/*">
                     <Route path="/" element={<h1>Dashboard</h1>}/>
-                    <Route path="/products" element={<h1>Products</h1>}/>
+                    <Route path="/products" element={<ProductAdmin/>}/>
+                    <Route path="/newProducts" element={<AddProductAdmin/>}/>
+
                     <Route path="/orders" element={<h1>Orders</h1>}/>
                 </Routes>
             </div>

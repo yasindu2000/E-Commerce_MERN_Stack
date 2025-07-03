@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = ()=>{
-    console.log(email, password);
+    
     axios.post("http://localhost:5000/users/login",{
       email : email,
       password : password
