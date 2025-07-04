@@ -17,6 +17,7 @@ function Login() {
     }).then((response)=>{
                console.log(response.data)
               //  alert("Login successful")
+              localStorage.setItem("token",response.data.token)
               toast.success("Login Successful")
                if(response.data.role == "admin"){
 
