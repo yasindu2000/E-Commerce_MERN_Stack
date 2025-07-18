@@ -68,7 +68,7 @@ function ProductAdmin() {
                                 return;
                               }
 
-                              axios.delete("http://localhost:5000/products/:" + product.productId,
+                              axios.delete(`http://localhost:5000/products/${product.productId}` ,
                                 {
                                   headers:{
                                   Authorization:`Bearer ${token}`
