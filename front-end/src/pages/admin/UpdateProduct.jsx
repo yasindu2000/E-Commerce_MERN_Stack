@@ -1,23 +1,26 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import uploadFile from "../../utils/MediaUpload";
 
 
-function AddProductAdmin() {
-
-	const [productId, setProductId] = useState("");
-	const [productName, setProductName] = useState("");
-	const [alternativeNames, setAlternativeNames] = useState("");
-	const [labelledPrice, setLabelledPrice] = useState("");
-	const [price, setPrice] = useState("");
+function UpdateProduct() {
+    const location = useLocation();
+	const [productId, setProductId] = useState(location.state.productId);
+	const [productName, setProductName] = useState(location.state.name);
+	const [alternativeNames, setAlternativeNames] = useState(location.state.altNames.join(","));
+	const [labelledPrice, setLabelledPrice] = useState(location.state.labelledPrice);
+	const [price, setPrice] = useState(location.state.price);
 	const [images, setImages] = useState([]);
-	const [description, setDescription] = useState("");
-	const [stock, setStock] = useState("");
-	const [isAvailable, setIsAvailable] = useState(true);
-	const [category, setCategory] = useState("cream");
-    const navigate = useNavigate()
+	const [description, setDescription] = useState(location.state.description);
+	const [stock, setStock] = useState(location.state.stock);
+	const [isAvailable, setIsAvailable] = useState(location.state.isAvailable);
+	const [category, setCategory] = useState(location.state.category);
+    const navigate = useNavigate();
+    
+
+    
 
     async function handleSubmit(){
 
@@ -48,6 +51,10 @@ function AddProductAdmin() {
             category: category
         }
 
+        if(responses.length == 0){
+            productData.images = location.state.images
+        }
+
         const token = localStorage.getItem("token");
 
         if(token == null){
@@ -55,7 +62,7 @@ function AddProductAdmin() {
             return;
         }
 
-        axios.post("http://localhost:5000/products", productData, 
+        axios.put(`http://localhost:5000/products/${productId}`, productData, 
             {
                 headers:{
                     Authorization: "Bearer "+token
@@ -63,15 +70,15 @@ function AddProductAdmin() {
             }
         ).then(
             (res)=>{
-                console.log("Product added successfully");
+                console.log("Product update successfully");
                 console.log(res.data);
-                toast.success("Product added successfully");
+                toast.success("Product updated successfully");
                 navigate("/admin/products");
             }
         ).catch(
             (error)=>{
-                console.error("Error adding product:", error);
-                toast.error("Failed to add product");              
+                console.error("Error updating product:", error);
+                toast.error("Failed to update product");              
             }
         )
 
@@ -85,6 +92,7 @@ function AddProductAdmin() {
 				<div className="w-[200px] flex flex-col gap-[5px]">
 					<label className="text-sm font-semibold">Product ID</label>
 					<input
+                        disabled
 						type="text"
 						value={productId}
 						onChange={(e) => {
@@ -192,7 +200,7 @@ function AddProductAdmin() {
 						Cancel
 					</Link>
 					<button onClick={handleSubmit} className="w-[200px] h-[50px] bg-black text-white border-[2px] rounded-md flex justify-center items-center ml-[20px] cursor-pointer">
-						Add Product
+						Update Product
 					</button>
 				</div>
 			</div>
@@ -200,4 +208,4 @@ function AddProductAdmin() {
   )
 }
 
-export default AddProductAdmin
+export default UpdateProduct

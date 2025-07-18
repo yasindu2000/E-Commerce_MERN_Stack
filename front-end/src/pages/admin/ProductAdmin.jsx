@@ -2,7 +2,7 @@
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoYnRma3Vua2hxc2FucnpzY29wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE4NjQyMzgsImV4cCI6MjA2NzQ0MDIzOH0.afeMlN8p3rqtzceprr3krf1RiAZn8qpIEVo7HI9gjbc
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {BiPlus, BiTrash} from "react-icons/bi"
+import {BiEdit, BiPlus, BiTrash} from "react-icons/bi"
 import { Link, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast";
 
@@ -59,7 +59,7 @@ function ProductAdmin() {
                     <td className="p-[10px]">{product.labelledPrice}</td>
                     <td className="p-[10px]">{product.category}</td>
                     <td className="p-[10px]">{product.stock}</td>
-                    <td className="p-[10px]">
+                    <td className="p-[10px] flex flex-row justify-center items-center">
                       <BiTrash className="bg-red-500 p-[6px] text-3xl rounded-full text-white cursor-pointer" onClick={
                         ()=>{
                               const token = localStorage.getItem("token");
@@ -89,6 +89,16 @@ function ProductAdmin() {
                               )
                         }
                       }/>
+
+                      <BiEdit onClick={
+                        ()=>{
+                          navigate("/admin/updateProduct", 
+                            {
+                              state : product,
+                            }
+                          )
+                        }
+                      } className="bg-blue-500 p-[6px] text-3xl rounded-full text-white shadow-2xl shadow-black cursor-pointer ml-[10px]"/>
                     </td>
                   </tr>
                 )

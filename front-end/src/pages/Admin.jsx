@@ -6,6 +6,7 @@ import { IoPeople } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import ProductAdmin from "./admin/ProductAdmin";
 import AddProductAdmin from "./admin/AddProductAdmin";
+import UpdateProduct from "./admin/UpdateProduct";
 
 function Admin() {
   return (
@@ -23,7 +24,7 @@ function Admin() {
                     <Route path="/" element={<h1>Dashboard</h1>}/>
                     <Route path="/products" element={<ProductAdmin/>}/>
                     <Route path="/newProducts" element={<AddProductAdmin/>}/>
-
+                    <Route path="/updateProduct" element={<UpdateProduct/>}/>
                     <Route path="/orders" element={<h1>Orders</h1>}/>
                 </Routes>
             </div>
