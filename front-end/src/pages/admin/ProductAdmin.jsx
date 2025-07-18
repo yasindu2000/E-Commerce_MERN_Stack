@@ -5,24 +5,31 @@ import { useEffect, useState } from "react";
 import {BiEdit, BiPlus, BiTrash} from "react-icons/bi"
 import { Link, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast";
+import Loader from "../../components/Loader";
 
 
 
 function ProductAdmin() {
 
   const [products, setProducts] = useState([]);
-  const [a, setA] = useState(0);
+  const [isLoading, setIsLoading,] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/products").then(
+
+    if(isLoading){
+         
+      axios.get("http://localhost:5000/products").then(
     (res)=>{
-            setProducts(res.data)
+            setProducts(res.data);
+            setIsLoading(false);
             
     }
   )
-  
+   
+    }
     
-  }, [a]);
+    
+  }, [isLoading]);
 
   const navigate = useNavigate();
   
@@ -30,7 +37,7 @@ function ProductAdmin() {
 
   return (
     <div className='w-full h-full border-[3px]'>
-      <table className="">
+      {isLoading? (<Loader/>): (<table className="">
         <thead className="">
            <tr>
             <th className="p-[10px]">Image</th>
@@ -79,7 +86,7 @@ function ProductAdmin() {
                                       console.log("product delete successfully")
                                       console.log(res.data)
                                       toast.success("Product delete successfully");
-                                      setA(a+1)
+                                      setIsLoading(!isLoading)
                                 }
                               ).catch(
                                 (error)=>{
@@ -107,7 +114,7 @@ function ProductAdmin() {
             )
            }
         </tbody>
-      </table>
+      </table>)}
         <Link to={"/admin/newProducts"} className="fixed right-[30px] bottom-[30px] p-[20px] text-white bg-black rounded-full shadow-2xl">
             <BiPlus className='text-3xl'/>
         </Link>
