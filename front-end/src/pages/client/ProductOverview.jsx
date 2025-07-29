@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import ImageSlider from "../../components/ImageSlider";
 
