@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Header from "../../components/Header";
 import Products from "./Products";
 import ProductOverview from "./ProductOverview";
+import Cart from "./Cart";
+import CheckoutPage from "./CheckoutPage";
 
 function ClientPage() {
   return (
@@ -14,7 +16,9 @@ function ClientPage() {
                 <Route path="/reviews" element={<h1 className="text-3xl text-center">Reviews Page</h1>}/>
                 <Route path="/about-us" element={<h1 className="text-3xl text-center">About Us Page</h1>}/>
                 <Route path="/contact-us" element={<h1 className="text-3xl text-center">Contact Us Page</h1>}/>
+                <Route path="/cart" element={<Cart/>}/>
                 <Route path="/overview/:productId" element={<ProductOverview/>}/>
+                <Route path="/checkout" element={<CheckoutPage/>}/>
                 <Route path="/*" element={<h1 className="text-3xl text-center">404 Not Found</h1>}/>
 
             </Routes>

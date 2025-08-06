@@ -36,7 +36,7 @@ function ProductAdmin() {
 
 
   return (
-    <div className='w-full h-full border-[3px]'>
+    <div className='w-full h-full shadow-gray-300 shadow-xl '>
       {isLoading? (<Loader/>): (<table className="">
         <thead className="">
            <tr>

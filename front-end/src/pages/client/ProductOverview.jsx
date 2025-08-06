@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import ImageSlider from "../../components/ImageSlider";
+import toast from "react-hot-toast";
+import { addToCart, getCart } from "../../utils/Cart";
 
 
 function ProductOverview() {
@@ -63,7 +65,14 @@ if(status == "loading"){
                       </div>
                       <div className="w-full flex flex-row justify-center items-center mt-[20px]  gap-[20px]">
                         <button className="w-[200px] h-[50px] cursor-pointer rounded-2xl shadow-2xl text-white bg-blue-900 border-[3px] border-blue-900 hover:bg-white hover:text-blue-900">Buy Now</button>
-                        <button className="w-[200px] h-[50px] cursor-pointer rounded-2xl shadow-2xl text-white bg-blue-600 border-[3px] border-blue-600 hover:bg-white hover:text-blue-600">Add To Cart</button>
+                        <button className="w-[200px] h-[50px] cursor-pointer rounded-2xl shadow-2xl text-white bg-blue-600 border-[3px] border-blue-600 hover:bg-white hover:text-blue-600" 
+                        onClick={
+                                ()=>{
+                                    addToCart(product,1)
+                                    toast.success("Product added to cart")
+                                    console.log(getCart())
+                                }
+                            }>Add To Cart</button>
                       </div>
                 </div>
             </div>
