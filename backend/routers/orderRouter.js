@@ -5,7 +5,7 @@ import { createOrder, getOrders } from '../controllers/orderController.js';
 const orderRouter = express.Router();
 
 orderRouter.post("/", createOrder)
-orderRouter.get("/", getOrders)
+orderRouter.get("/:page/:limit", getOrders)
 
 
 export default orderRouter
