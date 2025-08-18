@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Cart() {
   const [cart, setCart] = useState(getCart());
   const navigate = useNavigate();
+  
 
   return (
     <div className="w-full h-screen flex flex-col items-center py-[40px]">

@@ -14,6 +14,7 @@ function ProductCard(props) {
         {/* <span className="text-gray-400 text-[15px]">{product.productId}</span> */}
         <h1 className="text-xl text-gray-700 font-semibold">
           {product.name}{" "}
+          <br/>
           <span className=" text-gray-400 text-[15px]">{product.category}</span>
         </h1>
         <div className="">

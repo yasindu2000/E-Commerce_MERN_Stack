@@ -97,7 +97,7 @@ function Login() {
                 <div className="flex flex-row  w-[150px] rounded-2xl p-1 justify-center relative items-center">
                   
 
-                <button  onClick={login} className="w-[300px] ml-5 rounded-xl  text-lg text-black  cursor-pointer items-center justify-center">
+                <button  onClick={login} className="w-[300px] ml-5 rounded-xl  text-lg text-black cursor-pointer items-center justify-center">
                     <FcGoogle className='text-3xl  absolute p-[2px]' />Google
                 </button>
                 </div>

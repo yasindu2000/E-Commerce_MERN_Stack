@@ -5,12 +5,14 @@ import Loader from "../../components/Loader";
 import ImageSlider from "../../components/ImageSlider";
 import toast from "react-hot-toast";
 import { addToCart, getCart } from "../../utils/Cart";
+import { useCart } from "../../context/CartContext";
 
 function ProductOverview() {
   const params = useParams();
   const [product, setProduct] = useState(null);
   const [status, setStatus] = useState("loading");
   const navigate = useNavigate();
+  const { setCart } = useCart();
 
   useEffect(() => {
     if (status == "loading") {
@@ -32,10 +34,10 @@ function ProductOverview() {
 
       {status == "success" && (
         <div className="w-full h-full flex flex-row">
-          <div className="w-[49%] flex flex-col justify-center items-center">
+          <div className="w-[49%] flex flex-col justify-center items-center mb-30">
             <ImageSlider images={product.images} />
           </div>
-          <div className="w-[49%] h-full flex flex-col items-center pt-[50px]">
+          <div className="w-[49%] h-full flex flex-col items-center pt-[20px]">
             <h1 className="text-2xl font-bold">
               {product.name}{" "}
               <span className="font-light text-xl">
@@ -95,8 +97,8 @@ function ProductOverview() {
                 className="w-[200px] h-[50px] cursor-pointer rounded-2xl shadow-2xl text-white bg-blue-600 border-[3px] border-blue-600 hover:bg-white hover:text-blue-600"
                 onClick={() => {
                   addToCart(product, 1);
+                  setCart(getCart()); // refresh context
                   toast.success("Product added to cart");
-                  console.log(getCart());
                 }}
               >
                 Add To Cart
