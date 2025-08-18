@@ -4,12 +4,40 @@ import axios from "axios";
 import toast from 'react-hot-toast';
 import { IoCloseSharp } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
+import { useGoogleLogin } from '@react-oauth/google';
+
+
+
+//  secret -    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
 
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+   const login = useGoogleLogin({
+        onSuccess: (response)=>{
+            axios.post("http://localhost:5000/users/google-login",{
+                token : response.access_token
+            }).then(
+                (response)=>{
+                    console.log(response.data)
+                    localStorage.setItem("token",response.data.token)
+                    toast.success("Login successful")
+                    if(response.data.role == "admin"){
+                        navigate("/admin")
+                    }else if(response.data.role == "user"){
+                        navigate("/")
+                    }
+                }
+            ).catch(
+                ()=>{
+                    toast.error("google login failed")
+                }
+            )
+        }
+    })
 
   const handleSubmit = ()=>{
     
@@ -69,7 +97,7 @@ function Login() {
                 <div className="flex flex-row  w-[150px] rounded-2xl p-1 justify-center relative items-center">
                   
 
-                <button  onClick={handleSubmit} className="w-[300px] ml-5 rounded-xl  text-lg text-black  cursor-pointer items-center justify-center">
+                <button  onClick={login} className="w-[300px] ml-5 rounded-xl  text-lg text-black  cursor-pointer items-center justify-center">
                     <FcGoogle className='text-3xl  absolute p-[2px]' />Google
                 </button>
                 </div>
