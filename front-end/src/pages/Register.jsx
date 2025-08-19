@@ -22,7 +22,7 @@ async function handleSubmit(){
     toast.error("Please fill all required fields");
     return; // stop submission
   }
-  
+
   const userData = {
     firstName: firstName,
     lastName: lastName,
@@ -51,7 +51,7 @@ async function handleSubmit(){
 }
   return (
     <div className="w-full h-screen bg-white bg-cover bg-center flex justify-center items-center">
-      <div className="w-[500px] h-[700px] backdrop-blur-sm shadow-2xl rounded-[30px] gap-[5px] text-gray-800 flex flex-col items-center justify-center">
+      <div className="w-[500px] h-[650px] backdrop-blur-sm shadow-2xl rounded-[30px] gap-[5px] shadow-gray-500 text-gray-800 flex flex-col items-center justify-center">
         <h1 className="absolute top-[20px] text-3xl font-bold text-center my-1">
           Register
         </h1>
