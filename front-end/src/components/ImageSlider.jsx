@@ -1,38 +1,33 @@
 import { useState } from "react";
 
-
-function ImageSlider(props) {
-
-    const images = props.images;
-
-    const [activeImageIndex, setActiveImageIndex] = useState(0);
-
-
-
+function ImageSlider({ images }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   return (
-    <div className="w-[400px] h-[500px] ">
-         <img src={images[activeImageIndex]} alt="" className="w-full h-[400px] object-cover rounded-[5px]" />
-         <div className="w-full h-[100px] flex flex-row justify-center items-center gap-[5px]">
-            {
-                images.map(
-                    (image, index)=>{
-                        return(
-                                 <img onClick={
-                                    ()=>{
-                                        setActiveImageIndex(index)
-                                    }
-                                 } src={image} key={index} alt="" className={"w-[90px] h-[90px] object-cover cursor-pointer "+(activeImageIndex == index && "border-[4px]")} />
-                        )
-                           
-                        
-                    }
-                )
-            }
+    <div className="w-full max-w-[400px] mx-auto">
+      {/* Main Image */}
+      <img
+        src={images[activeImageIndex]}
+        alt=""
+        className="w-full h-[300px] sm:h-[400px] object-cover rounded-[5px]"
+      />
 
-         </div>
+      {/* Thumbnails */}
+      <div className="w-full flex flex-wrap justify-center items-center gap-2 mt-2">
+        {images.map((image, index) => (
+          <img
+            key={index}
+            onClick={() => setActiveImageIndex(index)}
+            src={image}
+            alt=""
+            className={`w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] object-cover cursor-pointer rounded-md ${
+              activeImageIndex === index ? "border-[3px] border-blue-500" : ""
+            }`}
+          />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default ImageSlider
+export default ImageSlider;

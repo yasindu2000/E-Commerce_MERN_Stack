@@ -18,6 +18,11 @@ function Register() {
   
 async function handleSubmit(){
 
+  if (!firstName || !lastName || !email || !password) {
+    toast.error("Please fill all required fields");
+    return; // stop submission
+  }
+  
   const userData = {
     firstName: firstName,
     lastName: lastName,
@@ -29,8 +34,7 @@ async function handleSubmit(){
 
   axios.post("http://localhost:5000/users",userData).then(
             (res)=>{
-                console.log("User added successfully");
-                console.log(res.data);
+                
                 toast.success("registered successfully");
                 navigate("/login");
             }
@@ -61,6 +65,7 @@ async function handleSubmit(){
             onChange={(e)=>{setFirstName(e.target.value)}}
             type="text"
             className="w-[300px] h-[40px] border border-gray-300 shadow-sm rounded-xl focus:outline-none"
+            required
           />
         </div>
 
@@ -73,6 +78,7 @@ async function handleSubmit(){
             onChange={(e)=>{setLastName(e.target.value)}}
             type="text"
             className="w-[300px] h-[40px] border border-gray-300 shadow-sm rounded-xl focus:outline-none"
+          required
           />
         </div>
 
@@ -85,6 +91,7 @@ async function handleSubmit(){
             onChange={(e)=>{setEmail(e.target.value)}}
             type="email"
             className="w-[300px] h-[40px] border border-gray-300 shadow-sm rounded-xl focus:outline-none"
+          required
           />
         </div>
 
@@ -97,6 +104,7 @@ async function handleSubmit(){
             onChange={(e)=>{setPassword(e.target.value)}}
             type="password"
             className="w-[300px] h-[40px] border border-gray-300 shadow-sm rounded-xl focus:outline-none"
+          required
           />
         </div>
 
@@ -132,6 +140,7 @@ async function handleSubmit(){
         {/* Submit */}
         <button
           onClick={handleSubmit}
+         
           className="w-[300px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300 cursor-pointer"
         >
           Register

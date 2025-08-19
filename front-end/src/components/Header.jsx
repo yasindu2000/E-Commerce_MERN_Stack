@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
+import { HiOutlineMenu, HiX } from "react-icons/hi";
 import logo from "../../public/main.png";
 import { useCart } from "../context/CartContext";
 
 function Header() {
   const { cart } = useCart();
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const linkClasses = ({ isActive }) =>
     isActive
@@ -13,40 +16,59 @@ function Header() {
       : "text-black text-xl";
 
   return (
-    <header className="h-[100px] flex justify-center items-center shadow-xl shadow-gray-300 gap-[40px] fixed top-0 left-0 w-full bg-white z-50">
-      {/* Logo */}
-      <img
-        src={logo}
-        alt="Logo"
-        className="absolute object-cover w-35 h-30 left-[80px] cursor-pointer"
-      />
+    <header className="fixed top-0 left-0 w-full bg-white z-50 shadow-md shadow-gray-300">
+      <div className="flex justify-between items-center h-[100px] px-4 sm:px-6 lg:px-20 relative">
+        {/* Hamburger & Logo */}
+        <div className="flex items-center gap-4">
+          <button
+            className="md:hidden text-black text-3xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <HiX /> : <HiOutlineMenu />}
+          </button>
+          <img src={logo} alt="Logo" className=" w-30 h-20  md:w-35 md:h-20 cursor-pointer" />
+        </div>
 
-      {/* Nav Links */}
-      <NavLink to="/" className={linkClasses}>
-        Home
-      </NavLink>
-      <NavLink to="/products" className={linkClasses}>
-        Products
-      </NavLink>
-      <NavLink to="/reviews" className={linkClasses}>
-        Reviews
-      </NavLink>
-      <NavLink to="/about-us" className={linkClasses}>
-        About Us
-      </NavLink>
-      <NavLink to="/contact-us" className={linkClasses}>
-        Contact Us
-      </NavLink>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-10">
+          <NavLink to="/" className={linkClasses}>Home</NavLink>
+          <NavLink to="/products" className={linkClasses}>Products</NavLink>
+          <NavLink to="/reviews" className={linkClasses}>Reviews</NavLink>
+          <NavLink to="/about-us" className={linkClasses}>About Us</NavLink>
+          <NavLink to="/contact-us" className={linkClasses}>Contact Us</NavLink>
+        </nav>
 
-      {/* Cart */}
-      <NavLink to="/cart" className="absolute right-[80px] ">
-        <BiCart className="text-black text-3xl" />
-        {cartCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-            {cartCount}
-          </span>
-        )}
-      </NavLink>
+        {/* Cart Icon */}
+        <NavLink to="/cart" className="relative text-black text-3xl">
+          <BiCart className="text-black text-3xl" />
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+              {cartCount}
+            </span>
+          )}
+        </NavLink>
+      </div>
+
+      {/* Mobile Sliding Menu */}
+      <div
+        className={`fixed top-0 left-0 h-full w-[250px] bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        } md:hidden flex flex-col pt-[100px] pl-6 gap-6`}
+      >
+        <NavLink to="/" className={linkClasses} onClick={() => setMenuOpen(false)}>Home</NavLink>
+        <NavLink to="/products" className={linkClasses} onClick={() => setMenuOpen(false)}>Products</NavLink>
+        <NavLink to="/reviews" className={linkClasses} onClick={() => setMenuOpen(false)}>Reviews</NavLink>
+        <NavLink to="/about-us" className={linkClasses} onClick={() => setMenuOpen(false)}>About Us</NavLink>
+        <NavLink to="/contact-us" className={linkClasses} onClick={() => setMenuOpen(false)}>Contact Us</NavLink>
+      </div>
+
+      {/* Overlay when menu is open */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
+          onClick={() => setMenuOpen(false)}
+        ></div>
+      )}
     </header>
   );
 }

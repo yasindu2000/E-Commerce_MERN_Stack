@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../../components/Loader";
 import ProductCard from "../../components/ProductCard";
@@ -12,7 +11,7 @@ function Products() {
 
   useEffect(() => {
     if (loading) {
-      if (query == "") {
+      if (query === "") {
         axios.get("http://localhost:5000/products").then((res) => {
           setProducts(res.data);
           setLoading(false);
@@ -28,26 +27,12 @@ function Products() {
     }
   }, [loading]);
 
-  // useEffect(() => {
-  //     if(loading){
-  //         axios.get("http://localhost:5000/products").then(
-  //             (res)=>{
-  //                setProducts(res.data);
-  //                setLoading(false);
-  //             }
-  //         )
-  //     }
-
-  // }, [loading]);
-
   return (
-    <div className="w-full h-full  ">
-       
-      <div className="relative w-[300px] left-[1120px]">
-        {/* Search Icon */}
+    <div className="w-full h-full p-4 md:pr-20 md:pl-20">
+      {/* Search Bar */}
+      <div className="relative w-full sm:w-[400px] mx-auto">
         <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
-        {/* Input */}
         <input
           type="text"
           placeholder="Search products..."
@@ -56,17 +41,22 @@ function Products() {
             setQuery(e.target.value);
             setLoading(true);
           }}
-          className="w-full h-[45px] pl-10 pr-4 border border-gray-100 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-200 transition-all duration-300"
+          className="w-full h-[45px] pl-10 pr-4 border border-gray-300 rounded-full shadow-sm 
+                     focus:outline-none focus:ring-2 focus:ring-gray-300 
+                     transition-all duration-300"
         />
       </div>
-   
+
       {loading ? (
         <Loader />
       ) : (
-        <div className="w-full flex flex-wrap gap-[40px] items-center justify-center mt-10 ">
-          {products.map((product) => {
-            return <ProductCard key={product.productId} product={product} />;
-          })}
+        <div
+          className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+                     gap-6 mt-10 place-items-center"
+        >
+          {products.map((product) => (
+            <ProductCard key={product.productId} product={product} />
+          ))}
         </div>
       )}
     </div>
