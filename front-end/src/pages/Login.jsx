@@ -81,14 +81,14 @@ function Login() {
                     <input onChange={(e)=>{
                       setEmail(e.target.value)
 
-                    }} type="text" className="w-[300px] h-[40px] border border-gray-500 rounded-xl focus:outline-none "/>
+                    }} type="text"  className="w-[300px] text-center h-[40px] border border-gray-100 shadow-md rounded-xl focus:outline-none "/>
                 </div>
                 <div className="w-[300px]  flex flex-col">
                     <span className="text-lg ">Password</span>
 
                     <input onChange={(e)=>{
                           setPassword(e.target.value)
-                    }} type="password" className="w-[300px] h-[40px] border border-gray-500  rounded-xl focus:outline-none"/>
+                    }} type="password"   className="text-center w-[300px] h-[40px] border border-gray-100 shadow-md rounded-xl focus:outline-none"/>
                       <Link to="/forget"><p className="underline text-blue-600 mt-1 text-[15px] ml-[160px]">forget password?</p></Link>
                 </div>
                 
