@@ -1,6 +1,8 @@
 
+import axios from "axios";
 import { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 function Register() {
@@ -11,8 +13,38 @@ function Register() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [role, setRole] = useState("user");
-  const [image, setImage] = useState("");
 
+  const navigate = useNavigate()
+  
+async function handleSubmit(){
+
+  const userData = {
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: password,
+    phone: phone,
+    role: role
+  }
+
+  axios.post("http://localhost:5000/users",userData).then(
+            (res)=>{
+                console.log("User added successfully");
+                console.log(res.data);
+                toast.success("registered successfully");
+                navigate("/login");
+            }
+        ).catch(
+            (error)=>{
+                console.error("Registered failed", error);
+                toast.error("Registered failed");              
+            }
+        )
+
+        console.log(productData);
+
+
+}
   return (
     <div className="w-full h-screen bg-white bg-cover bg-center flex justify-center items-center">
       <div className="w-[500px] h-[700px] backdrop-blur-sm shadow-2xl rounded-[30px] gap-[5px] text-gray-800 flex flex-col items-center justify-center">
@@ -95,23 +127,12 @@ function Register() {
           </select>
         </div>
 
-        {/* Profile Image Upload */}
-        <div className="w-[300px] flex flex-col">
-          <span className="text-lg">Profile Image</span>
-          <input
-            name="image"
-            value={image}
-            onChange={(e)=>{setImage(e.target.value)}}
-            type="file"
-            accept="image/*"
-            className="w-[300px] h-[40px] border border-gray-300 shadow-sm rounded-xl focus:outline-none p-1"
-          />
-        </div>
+        
 
         {/* Submit */}
         <button
-          
-          className="w-[300px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-3 hover:bg-blue-600 transition-all duration-300 cursor-pointer"
+          onClick={handleSubmit}
+          className="w-[300px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300 cursor-pointer"
         >
           Register
         </button>
