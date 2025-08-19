@@ -6,6 +6,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Toaster } from "react-hot-toast";
 import TestPage from "./pages/TestPage";
 import ClientPage from "./pages/client/ClientPage";
+import Forget from "./pages/client/Forget";
 
 const clientId = "989136870072-8dt6vqf0106tobie6qnjndb3u78f8lj8.apps.googleusercontent.com" ;
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/admin/*" element={<Admin />} />
             <Route path="/test" element={<TestPage />} />
+            <Route path="/forget" element={<Forget />} />
             <Route path="/*" element={<ClientPage />} />
           </Routes>
         </div>

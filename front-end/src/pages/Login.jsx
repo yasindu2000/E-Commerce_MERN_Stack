@@ -89,16 +89,17 @@ function Login() {
                     <input onChange={(e)=>{
                           setPassword(e.target.value)
                     }} type="password" className="w-[300px] h-[40px] border border-gray-500  rounded-xl focus:outline-none"/>
-
+                      <Link to="/forget"><p className="underline text-blue-600 mt-1 text-[15px] ml-[160px]">forget password?</p></Link>
                 </div>
-                <button onClick={handleSubmit} className="w-[300px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-5 hover:bg-blue-600 transition-all duration-300 cursor-pointer">
+                
+                <button onClick={handleSubmit} className="w-[300px] h-[40px] bg-blue-500 rounded-xl text-white text-lg mt-1 hover:bg-blue-600 transition-all duration-300 cursor-pointer">
                     Login
                 </button>
                 <div className="flex flex-row  w-[150px] rounded-2xl p-1 justify-center relative items-center">
                   
 
-                <button  onClick={login} className="w-[300px] ml-5 rounded-xl  text-lg text-black cursor-pointer items-center justify-center">
-                    <FcGoogle className='text-3xl  absolute p-[2px]' />Google
+                <button  onClick={login} className="w-[300px] ml-6 rounded-xl  text-lg text-black cursor-pointer items-center justify-center">
+                    <FcGoogle className='text-3xl   absolute p-[2px]' />Google
                 </button>
                 </div>
                 <p>Don't have an account? <Link to="/register" className="text-blue-500">Sign up</Link> from here</p>
