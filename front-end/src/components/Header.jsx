@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
 import logo from "../../public/main.png";
 import { useCart } from "../context/CartContext";
+import { IoLogOutOutline } from "react-icons/io5";
 
 function Header() {
   const { cart } = useCart();
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const linkClasses = ({ isActive }) =>
     isActive
@@ -39,7 +42,7 @@ function Header() {
         </nav>
 
         {/* Cart Icon */}
-        <NavLink to="/cart" className="relative text-black text-3xl">
+        <NavLink to="/cart" className="relative text-black text-3xl right-[80px]">
           <BiCart className="text-black text-3xl" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
@@ -47,6 +50,17 @@ function Header() {
             </span>
           )}
         </NavLink>
+        {
+					token!=null&&<button className=" absolute text-black md:right-[60px] right-[20px] cursor-pointer hover:text-red-700 text-xl ml-4" onClick={
+						()=>{
+							localStorage.removeItem("token");
+							navigate("/login");
+						}
+					}><IoLogOutOutline className=" text-3xl font-semibold"/>
+						
+					</button>
+
+				}
       </div>
 
       {/* Mobile Sliding Menu */}
