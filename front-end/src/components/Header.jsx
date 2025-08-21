@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { BiCart } from "react-icons/bi";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
-import logo from "../../public/main.png";
+import logo from "../../public/logo5.jpg";
 import { useCart } from "../context/CartContext";
 import { IoLogOutOutline } from "react-icons/io5";
 
@@ -29,7 +29,7 @@ function Header() {
           >
             {menuOpen ? <HiX /> : <HiOutlineMenu />}
           </button>
-          <img src={logo} alt="Logo" className=" w-30 h-20  md:w-35 md:h-20 cursor-pointer" />
+          <img src={logo} alt="Logo" className=" w-30 h-20  md:w-35 md:h-25 cursor-pointer" />
         </div>
 
         {/* Desktop Nav */}
