@@ -29,7 +29,7 @@ function Header() {
           >
             {menuOpen ? <HiX /> : <HiOutlineMenu />}
           </button>
-          <img src={logo} alt="Logo" className=" w-30 h-20  md:w-35 md:h-25 cursor-pointer" />
+          <img src={logo} alt="Logo" className=" w-30 h-25  md:w-35 md:h-30 md:mb-5 cursor-pointer" />
         </div>
 
         {/* Desktop Nav */}

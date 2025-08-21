@@ -6,7 +6,7 @@ import image3 from "../../../public/profile_img_3.png"
 
 function AboutUs() {
   return (
-    <div className="bg-gray-50">
+    <div className="">
       {/* Hero Section */}
       <section className="bg-green-200 text-black py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>

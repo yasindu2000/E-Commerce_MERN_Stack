@@ -5,7 +5,7 @@ import twitter from "../../../public/twitter.png"
 
 function ContactUs() {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className=" min-h-screen">
       {/* Hero Section */}
       <section className="bg-green-200 text-black py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
