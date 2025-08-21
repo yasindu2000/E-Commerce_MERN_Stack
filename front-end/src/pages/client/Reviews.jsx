@@ -1,37 +1,51 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaEdit, FaTrash, FaStar } from "react-icons/fa";
+import axios from "axios"
+import toast from "react-hot-toast";
 
 function Reviews() {
-  const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState({ name: "", comment: "", rating: 5 });
-  const [editingIndex, setEditingIndex] = useState(null);
+ 
+  const [name, setName] = useState("");
+  const [comment, setComment] = useState("");
+  const [rating, setRating] = useState(5);
 
-  // Handle adding or updating a review
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!newReview.name || !newReview.comment) return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  
 
-    if (editingIndex !== null) {
-      const updated = [...reviews];
-      updated[editingIndex] = newReview;
-      setReviews(updated);
-      setEditingIndex(null);
-    } else {
-      setReviews([...reviews, newReview]);
-    }
-    setNewReview({ name: "", comment: "", rating: 5 });
-  };
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Please login first!");
+    window.location.href = "/login";
+    return;
+  }
 
-  // Handle editing
-  const handleEdit = (index) => {
-    setNewReview(reviews[index]);
-    setEditingIndex(index);
-  };
+  const reviewData = {
+            
+            name: name,
+            comment:comment,
+            rating:rating
+        }
 
-  // Handle deleting
-  const handleDelete = (index) => {
-    setReviews(reviews.filter((_, i) => i !== index));
-  };
+
+        axios.post("http://localhost:5000/reviews",reviewData
+        ).then(
+            (res)=>{
+                console.log("Review added successfully");
+                console.log(res.data);
+                toast.success("Review added successfully");
+                
+            }
+        ).catch(
+            (error)=>{
+                console.error("Error adding review", error);
+                toast.error("Failed to add review");              
+            }
+        )
+
+       
+
+  }
 
   return (
     <div className="h-full  p-4 md:p-2">
@@ -46,14 +60,14 @@ function Reviews() {
           <input
             type="text"
             placeholder="Your Name"
-            value={newReview.name}
-            onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
+            value={name}
+            onChange={(e)=> setName(e.target.value)}
             className="border-t-1 border-gray-200 shadow-md shadow-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-300"
           />
           <textarea
             placeholder="Write your review..."
-            value={newReview.comment}
-            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+           value={comment}
+            onChange={(e)=> setComment(e.target.value)}
             className="border-t-1 border-gray-200 shadow-md shadow-gray-300 rounded-xl px-4 py-2 h-24 focus:outline-none focus:ring-2 focus:ring-gray-300"
           ></textarea>
 
@@ -61,10 +75,8 @@ function Reviews() {
           <div className="flex items-center gap-2">
             <label className="font-medium text-gray-500">Rating:</label>
             <select
-              value={newReview.rating}
-              onChange={(e) =>
-                setNewReview({ ...newReview, rating: parseInt(e.target.value) })
-              }
+              value={rating}
+            onChange={(e)=> setRating(e.target.value)}
               className="border border-gray-400 text-gray-600 rounded-lg px-2 py-1 focus:outline-none"
             >
               {[5, 4, 3, 2, 1].map((r) => (
@@ -80,47 +92,13 @@ function Reviews() {
             type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded-xl cursor-pointer hover:bg-blue-700 transition duration-300"
           >
-            {editingIndex !== null ? "Update Review" : "Add Review"}
+           Add Review
           </button>
         </form>
       </div>
 
       {/* Reviews List */}
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {reviews.length === 0 ? (
-          <p className="text-center text-gray-500 col-span-full">No reviews yet. Be the first to add one!</p>
-        ) : (
-          reviews.map((review, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-md rounded-xl p-4 flex flex-col gap-2 relative"
-            >
-              {/* Rating */}
-              <div className="flex text-yellow-400">
-                {[...Array(review.rating)].map((_, i) => (
-                  <FaStar key={i} />
-                ))}
-              </div>
-              {/* Reviewer Name */}
-              <h2 className="text-lg font-semibold text-gray-800">{review.name}</h2>
-              {/* Comment */}
-              <p className="text-gray-600">{review.comment}</p>
-
-              {/* Edit & Delete Buttons */}
-              <div className="absolute top-3 right-3 flex gap-3 text-gray-500">
-                <FaEdit
-                  className="cursor-pointer hover:text-blue-500"
-                  onClick={() => handleEdit(index)}
-                />
-                <FaTrash
-                  className="cursor-pointer hover:text-red-500"
-                  onClick={() => handleDelete(index)}
-                />
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+      
     </div>
   );
 }

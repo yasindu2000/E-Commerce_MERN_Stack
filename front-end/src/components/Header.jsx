@@ -5,6 +5,7 @@ import { HiOutlineMenu, HiX } from "react-icons/hi";
 import logo from "../../public/logo5.jpg";
 import { useCart } from "../context/CartContext";
 import { IoLogOutOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 
 function Header() {
   const { cart } = useCart();
@@ -54,7 +55,8 @@ function Header() {
 					token!=null&&<button className=" absolute text-black md:right-[60px] right-[20px] cursor-pointer hover:text-red-700 text-xl ml-4" onClick={
 						()=>{
 							localStorage.removeItem("token");
-							navigate("/login");
+              toast.success("Logout Successfull")
+							navigate("/");
 						}
 					}><IoLogOutOutline className=" text-3xl font-semibold"/>
 						
