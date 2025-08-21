@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import CheckoutPage from "./CheckoutPage";
 import AboutUs from "./AboutUs";
 import ContactUs from "./ContactUs"
+import HomePage from "./HomePage"
 
 function ClientPage() {
   return (
@@ -13,7 +14,7 @@ function ClientPage() {
         <Header/>
         <div className="w-full h-[calc(100%-100px)] mt-[150px] ">
             <Routes path="/">
-                <Route path="/" element={<h1 className="text-3xl text-center">Welcome to the Home Page</h1>}/>
+                <Route path="/" element={<HomePage/>}/>
                 <Route path="/products" element={<Products/>}/>
                 <Route path="/reviews" element={<h1 className="text-3xl text-center">Reviews Page</h1>}/>
                 <Route path="/about-us" element={<AboutUs/>}/>

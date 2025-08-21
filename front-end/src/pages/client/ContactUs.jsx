@@ -1,4 +1,7 @@
 import map from "../../../public/map.png"
+import facebook from "../../../public/facebook.png"
+import instagram from "../../../public/instagram.png"
+import twitter from "../../../public/twitter.png"
 
 function ContactUs() {
   return (
@@ -26,10 +29,10 @@ function ContactUs() {
           </div>
           <div className="mt-6">
             <h3 className="text-2xl font-semibold mb-2">Follow Us</h3>
-            <div className="flex gap-4 text-blue-600 text-xl">
-              <a href="#">Facebook</a>
-              <a href="#">Instagram</a>
-              <a href="#">Twitter</a>
+            <div className="flex gap-4 text-blue-600 text-xl mt-4">
+              <a href="#"><img src={facebook}alt="" className="w-8.5 h-8.5 rounded-full shadow-sky-600 shadow-md" /></a>
+              <a href="#"><img src={instagram} alt="" className="w-8 h-8 shadow-md rounded-xl shadow-pink-800" /></a>
+              
             </div>
           </div>
         </div>
@@ -72,9 +75,9 @@ function ContactUs() {
       {/* Map Section */}
       <section className="py-16 px-4 max-w-6xl mx-auto">
         <h2 className="text-3xl font-semibold text-center mb-8">Our Location</h2>
-        <div className="w-full h-64 md:h-96  rounded-lg flex items-center justify-center ">
+        <div className="w-full h-64 md:h-96  rounded-lg flex items-center justify-center overflow-hidden ">
           {/* Replace this with Google Maps iframe */}
-          <img src={map} alt="" className="object-cover w-full h-96" />
+          <img src={map} alt="" className="object-cover rounded-2xl w-full h-96" />
         </div>
       </section>
     </div>
