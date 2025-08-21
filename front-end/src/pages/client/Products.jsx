@@ -3,6 +3,7 @@ import axios from "axios";
 import Loader from "../../components/Loader";
 import ProductCard from "../../components/ProductCard";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -28,7 +29,10 @@ function Products() {
   }, [loading]);
 
   return (
-    <div className="w-full h-full  p-4 md:pr-20 md:pl-20">
+
+    <>
+    <div className="w-full h-full   ">
+      <div className="p-4 md:pr-20 md:pl-20">
       {/* Search Bar */}
       <div className="relative w-full sm:w-[400px] mx-auto">
         <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -59,7 +63,19 @@ function Products() {
           ))}
         </div>
       )}
+      </div>
+      {/* Call to Action */}
+      <section className="bg-green-200 text-black mt-8 py-16 text-center">
+        <h2 className="text-3xl font-bold mb-4">Join Us on Our Journey</h2>
+        <p className="mb-6 max-w-2xl mx-auto">Experience the best products and services with our CMart.</p>
+        <Link to="/products"><button className="bg-white text-gray-500 font-semibold cursor-pointer shadow-xl py-3 px-6 rounded-full hover:bg-gray-100 transition">
+          Shop Now
+        </button>
+        </Link>
+      </section> 
     </div>
+     
+    </>
   );
 }
 

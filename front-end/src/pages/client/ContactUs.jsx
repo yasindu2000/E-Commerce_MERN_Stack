@@ -2,6 +2,7 @@ import map from "../../../public/map.png"
 import facebook from "../../../public/facebook.png"
 import instagram from "../../../public/instagram.png"
 import twitter from "../../../public/twitter.png"
+import { Link } from "react-router-dom";
 
 function ContactUs() {
   return (
@@ -80,6 +81,15 @@ function ContactUs() {
           <img src={map} alt="" className="object-cover rounded-2xl w-full h-96" />
         </div>
       </section>
+      {/* Call to Action */}
+      <section className="bg-green-200 text-black mt-4 py-16 text-center">
+        <h2 className="text-3xl font-bold mb-4">Join Us on Our Journey</h2>
+        <p className="mb-6 max-w-2xl mx-auto">Experience the best products and services with our CMart.</p>
+        <Link to="/products"><button className="bg-white text-gray-500 font-semibold cursor-pointer shadow-xl py-3 px-6 rounded-full hover:bg-gray-100 transition">
+          Shop Now
+        </button>
+        </Link>
+      </section> 
     </div>
   );
 }
