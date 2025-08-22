@@ -5,39 +5,42 @@ import { MdOutlineStar } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
+import Loader from "../../components/Loader";
 
 function Reviews() {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [editingReview, setEditingReview] = useState(null);
   const [updatedComment, setUpdatedComment] = useState("");
   const [updatedRating, setUpdatedRating] = useState(5);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/reviews")
-      .then((res) => {
-        setReviews(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching reviews", err);
-        toast.error("Failed to fetch reviews");
-      });
-  }, [reviews]);
-
-
-
+    if (loading) {
+      axios
+        .get("http://localhost:5000/reviews")
+        .then((res) => {
+          setReviews(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching reviews", err);
+          toast.error("Failed to fetch reviews");
+        });
+    }
+  }, [loading]);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("token");
     if (!token) {
-      toast.error("Please Login First")
-      navigate("/login")
-      
+      toast.error("Please Login First");
+      navigate("/login");
+
       return;
     }
 
@@ -47,12 +50,15 @@ function Reviews() {
       rating: rating,
     };
 
-    axios
+    await axios
       .post("http://localhost:5000/reviews", reviewData)
       .then((res) => {
-        console.log("Review added successfully");
         console.log(res.data);
-        toast.success("Review added successfully");
+        toast.success("Review Added Successfully");
+        setLoading(true); // Refresh reviews
+        setName("");
+        setComment("");
+        setRating(5);
       })
       .catch((error) => {
         console.error("Error adding review", error);
@@ -160,11 +166,11 @@ function Reviews() {
         </div>
 
         {/* Reviews List */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.length === 0 ? (
-            <p className="text-center text-gray-500 col-span-full">
-              No reviews yet. Be the first to add one!
-            </p>
+        <div className="max-w-4xl mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {loading ? (
+            <div className="flex justify-center items-center ml-[400px]">
+              <Loader />
+            </div>
           ) : (
             reviews.map((review, index) => (
               <div
