@@ -11,7 +11,7 @@ function Header() {
   const { cart } = useCart();
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
 
   const linkClasses = ({ isActive }) =>
@@ -43,7 +43,7 @@ function Header() {
         </nav>
 
         {/* Cart Icon */}
-        <NavLink to="/cart" className="relative text-black text-3xl right-[80px]">
+        <NavLink to="/cart" className="relative text-black text-3xl right-[100px]">
           <BiCart className="text-black text-3xl" />
           {cartCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
@@ -51,18 +51,31 @@ function Header() {
             </span>
           )}
         </NavLink>
+        
         {
-					token!=null&&<button className=" absolute text-black md:right-[60px] right-[20px] cursor-pointer hover:text-red-700 text-xl ml-4" onClick={
-						()=>{
-							localStorage.removeItem("token");
-              toast.success("Logout Successfull")
-							navigate("/");
-						}
-					}><IoLogOutOutline className=" text-3xl font-semibold"/>
-						
-					</button>
+  token ? (
+    <button
+      className="absolute text-black md:right-[60px] right-[20px] cursor-pointer hover:text-red-700 text-xl ml-4"
+      onClick={() => {
+        localStorage.removeItem("token");
+        setToken(null);
+        toast.success("Logout Successful");
+        navigate("/");
+      }}
+    >
+      <IoLogOutOutline className="text-3xl font-semibold" />
+    </button>
+  ) : (
+    <button
+      className="absolute border-2 shadow-md  border-gray-300 rounded-3xl md:px-5 px-2 py-1 md:p-1 text-[15px] md:text-md  md:right-[60px] right-[20px] cursor-pointer font-semibold hover:bg-gray-100 text-gray-600 ml-7"
+      onClick={() => navigate("/login")}
+    >
+      Login
+    </button>
+  )
+}
 
-				}
+
       </div>
 
       {/* Mobile Sliding Menu */}
