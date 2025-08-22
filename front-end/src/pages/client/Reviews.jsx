@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { MdOutlineStar } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { MdModeEditOutline } from "react-icons/md";
 
@@ -11,6 +11,7 @@ function Reviews() {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(5);
   const [reviews, setReviews] = useState([]);
+  const navigate = useNavigate()
 
   const [editingReview, setEditingReview] = useState(null);
   const [updatedComment, setUpdatedComment] = useState("");
@@ -28,11 +29,15 @@ function Reviews() {
       });
   }, [reviews]);
 
+
+
+
   const handleSubmit = async (e) => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("Please login first!");
-      window.location.href = "/login";
+      toast.error("Please Login First")
+      navigate("/login")
+      
       return;
     }
 
@@ -214,7 +219,7 @@ function Reviews() {
                         className="bg-gray-200 text-white  rounded-full py-1 px-1 text-xl"
                         onClick={() => handleEdit(review)}
                       >
-                        <MdModeEditOutline className=" cursor-pointer text-blue-600" />
+                        <MdModeEditOutline className=" cursor-pointer text-black" />
                       </button>
                       <button
                         className="bg-gray-200 text-white  rounded-full py-1 px-1 text-xl "
