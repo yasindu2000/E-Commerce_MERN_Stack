@@ -40,7 +40,7 @@ function ProductOverview() {
           </div>
 
           {/* Right side - Details */}
-          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start md:items-center pt-5">
+          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start  pt-5">
             <h1 className="text-2xl font-bold text-center md:text-left">
               {product.name}{" "}
               <span className="font-light text-xl block md:inline">

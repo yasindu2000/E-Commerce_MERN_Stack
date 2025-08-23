@@ -242,3 +242,25 @@ export async function resetPassword(req, res) {
     res.status(500).json({ message: "Failed to reset password" });
   }
 }
+
+export async function getAllUsers(req, res) {
+  try {
+    const users = await User.find({}, "-password"); // exclude password
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+}
+
+
+
+
+export async function deleteUser(req, res) {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to delete user" });
+  }
+}
