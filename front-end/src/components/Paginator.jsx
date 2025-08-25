@@ -6,7 +6,7 @@ function Paginator(props) {
 
   return (
      <div className="w-full flex flex-row justify-center items-center gap-[20px] ">
-            <select className="w-[100px] h-[40px] border border-gray-300 rounded-md p-[10px]" value={currentPage} onChange={(e)=>{
+            <select className="w-[100px] h-[40px] border border-gray-300 rounded-md p-[8px]" value={currentPage} onChange={(e)=>{
                 setLoading(true);
                 setCurrentPage(parseInt(e.target.value));
 

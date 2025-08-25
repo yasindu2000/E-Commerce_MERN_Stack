@@ -59,7 +59,7 @@ function UserView() {
   }
 
   return (
-    <div className="w-full p-6">
+    <div className="w-full p-6 overflow-y-auto">
       <div className="overflow-x-auto shadow-md rounded-lg">
         <table className="min-w-full text-sm text-left text-gray-700">
           <thead className="bg-gray-200 text-gray-700 uppercase text-xs">

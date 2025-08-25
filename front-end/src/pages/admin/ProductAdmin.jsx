@@ -21,7 +21,7 @@ function ProductAdmin() {
   }, [isLoading]);
 
   return (
-    <div className='w-full h-full shadow-gray-300 shadow-xl bg-white p-4'>
+    <div className='w-full h-full shadow-gray-300 shadow-xl bg-white p-4 overflow-y-auto'>
       {isLoading ? (
         <Loader />
       ) : (

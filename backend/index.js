@@ -23,7 +23,7 @@ app.use(
         if(value != null){
             const token = value.replace("Bearer ","")
             jwt.verify(token, process.env.JWT_SECRET,(err,decoded)=>{ 
-                if(decoded == null){
+                if(err || !decoded){
                     res.status(403).json(
                         {
                             message : "Unauthorized"

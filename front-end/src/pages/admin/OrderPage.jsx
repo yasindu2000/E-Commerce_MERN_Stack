@@ -34,7 +34,7 @@ function OrderPage() {
   }, [loading, page, limit]);
 
   return (
-    <div className="w-full h-full p-4 bg-gray-50 min-h-screen">
+    <div className="w-full h-full p-4 bg-gray-50 min-h-screen overflow-y-auto">
       
 
       {/* Table */}
